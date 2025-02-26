@@ -1,0 +1,32 @@
+<div class="container mt-5">
+  <h1 class="mb-4"><%= @restaurant.name %></h1>
+
+  <div class="card mb-4">
+    <div class="card-body">
+      <p class="card-text"><strong>Address:</strong> <%= @restaurant.address %></p>
+      <p class="card-text"><strong>Phone:</strong> <%= @restaurant.phone_number %></p>
+      <p class="card-text"><strong>Category:</strong> <%= @restaurant.category %></p>
+    </div>
+  </div>
+
+  <h2 class="mb-3">Reviews</h2>
+  <ul class="list-group mb-4">
+    <% @restaurant.reviews.each do |review| %>
+      <li class="list-group-item">
+        <div class="d-flex justify-content-between align-items-center">
+          <p class="mb-0"><%= review.content %></p>
+          <span class="badge bg-primary rounded-pill"><%= review.rating %></span>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+
+  <div class="d-grid gap-2 d-md-block mb-5">
+    <%= link_to "Return to the list", restaurants_path, class: "btn btn-outline-secondary me-2" %>
+    <%= link_to "Update this restaurant", edit_restaurant_path, class: "btn btn-outline-primary me-2" %>
+    <%= link_to "Add a new review", new_restaurant_review_path(@restaurant), class: "btn btn-outline-success me-2" %>
+    <%= link_to "Delete", restaurant_path(@restaurant), class: "btn btn-outline-danger",
+        data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+  </div>
+</div>
+
